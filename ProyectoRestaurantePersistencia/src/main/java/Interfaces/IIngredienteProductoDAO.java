@@ -1,5 +1,5 @@
 
-package Iterfaces;
+package Interfaces;
 
 import Dominio.IngredienteProducto;
 import Excepciones.PersistenciaException;
