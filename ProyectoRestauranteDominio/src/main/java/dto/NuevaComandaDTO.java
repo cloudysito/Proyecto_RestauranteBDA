@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  *
- * @author Dana Chavez
+ * @author santi
  */
 public class NuevaComandaDTO {
     private String folio;

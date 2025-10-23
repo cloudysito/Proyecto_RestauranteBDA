@@ -6,7 +6,7 @@ package dto;
 
 /**
  *
- * @author Dana Chavez
+ * @author santi
  */
 public class NuevaMesaDTO {
     
