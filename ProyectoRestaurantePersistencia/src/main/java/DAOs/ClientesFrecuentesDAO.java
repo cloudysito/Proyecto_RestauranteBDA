@@ -4,8 +4,13 @@
  */
 package DAOs;
 
+import Dominio.ClienteFrecuente;
+import Dominio.VistaFidelidadCliente;
 import Excepciones.PersistenciaException;
 import Interfaces.IClientesFrecuentesDAO;
+import conexcion.ManejadorConexiones;
+import dto.ClienteFrecuenteDTO;
+import dto.NuevoClienteFrecuenteDTO;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.*;

@@ -4,8 +4,12 @@
  */
 package DAOs;
 
+import Dominio.EstadoMesa;
+import Dominio.Mesa;
 import Excepciones.PersistenciaException;
 import Interfaces.IMesasDAO;
+import conexcion.ManejadorConexiones;
+import dto.NuevaMesaDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;

@@ -4,8 +4,11 @@
  */
 package DAOs;
 
+import Dominio.Ingrediente;
 import Excepciones.PersistenciaException;
 import Interfaces.IIngredientesDAO;
+import conexcion.ManejadorConexiones;
+import dto.NuevoIngredienteDTO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;

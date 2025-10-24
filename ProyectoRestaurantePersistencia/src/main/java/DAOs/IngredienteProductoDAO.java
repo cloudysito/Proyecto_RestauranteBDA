@@ -4,8 +4,13 @@
  */
 package DAOs;
 
+import Dominio.Ingrediente;
+import Dominio.IngredienteProducto;
+import Dominio.Producto;
 import Excepciones.PersistenciaException;
 import Interfaces.IIngredienteProductoDAO;
+import conexcion.ManejadorConexiones;
+import dto.IngredienteProductoDTO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;

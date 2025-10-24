@@ -4,11 +4,13 @@
  */
 package DAOs;
 
+import Dominio.Empleado;
 import Excepciones.PersistenciaException;
 import Interfaces.IEmpleadosDAO;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import conexcion.ManejadorConexiones;
 
 /**
  *
