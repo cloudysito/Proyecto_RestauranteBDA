@@ -4,6 +4,9 @@
  */
 package interfaces;
 
+import dto.EmpleadoDTO;
+import exception.NegocioException;
+
 /**
  *
  * @author garfi

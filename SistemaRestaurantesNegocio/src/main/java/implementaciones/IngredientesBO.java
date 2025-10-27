@@ -4,6 +4,11 @@
  */
 package implementaciones;
 
+import Dominio.Ingrediente;
+import Dominio.UnidadMedida;
+import Excepciones.PersistenciaException;
+import Interfaces.IIngredientesDAO;
+import dto.NuevoIngredienteDTO;
 import exception.NegocioException;
 import interfaces.IIngredientesBO;
 import java.util.List;

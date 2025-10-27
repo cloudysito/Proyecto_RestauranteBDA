@@ -4,6 +4,10 @@
  */
 package interfaces;
 
+import Dominio.Producto;
+import Dominio.TipoProducto;
+import dto.NuevoProductoDTO;
+import exception.NegocioException;
 import java.util.List;
 
 /**

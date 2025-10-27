@@ -4,6 +4,11 @@
  */
 package implementaciones;
 
+import Dominio.EstadoMesa;
+import Dominio.Mesa;
+import Excepciones.PersistenciaException;
+import Interfaces.IMesasDAO;
+import dto.NuevaMesaDTO;
 import exception.NegocioException;
 import interfaces.IMesasBO;
 import java.util.List;
