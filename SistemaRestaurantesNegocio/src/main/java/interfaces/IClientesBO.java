@@ -4,6 +4,10 @@
  */
 package interfaces;
 
+import Dominio.ClienteFrecuente;
+import dto.ClienteFrecuenteDTO;
+import dto.NuevoClienteFrecuenteDTO;
+import exception.NegocioException;
 import java.util.Calendar;
 import java.util.List;
 

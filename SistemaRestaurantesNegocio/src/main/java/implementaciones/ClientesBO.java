@@ -4,6 +4,12 @@
  */
 package implementaciones;
 
+import Dominio.ClienteFrecuente;
+import Excepciones.PersistenciaException;
+import Interfaces.IClientesFrecuentesDAO;
+import Utilidad.SeguridadUtil;
+import dto.ClienteFrecuenteDTO;
+import dto.NuevoClienteFrecuenteDTO;
 import exception.NegocioException;
 import interfaces.IClientesBO;
 import java.util.Calendar;

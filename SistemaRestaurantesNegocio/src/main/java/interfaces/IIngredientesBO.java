@@ -4,6 +4,9 @@
  */
 package interfaces;
 
+import Dominio.Ingrediente;
+import dto.NuevoIngredienteDTO;
+import exception.NegocioException;
 import java.util.List;
 
 /**

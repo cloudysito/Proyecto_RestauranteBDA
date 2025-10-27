@@ -4,6 +4,12 @@
  */
 package fabrica;
 
+import DAOs.ClientesFrecuentesDAO;
+import DAOs.IngredientesDAO;
+import DAOs.ProductosDAO;
+import Interfaces.IClientesFrecuentesDAO;
+import Interfaces.IIngredientesDAO;
+import Interfaces.IProductosDAO;
 import implementaciones.ClientesBO;
 import implementaciones.IngredientesBO;
 import implementaciones.ProductosBO;

@@ -4,6 +4,11 @@
  */
 package implementaciones;
 
+import Dominio.Producto;
+import Dominio.TipoProducto;
+import Excepciones.PersistenciaException;
+import Interfaces.IProductosDAO;
+import dto.NuevoProductoDTO;
 import exception.NegocioException;
 import interfaces.IProductosBO;
 import java.util.List;

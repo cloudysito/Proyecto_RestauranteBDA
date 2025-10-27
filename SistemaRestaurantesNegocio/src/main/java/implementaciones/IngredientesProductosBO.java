@@ -4,6 +4,10 @@
  */
 package implementaciones;
 
+import DAOs.IngredienteProductoDAO;
+import Dominio.IngredienteProducto;
+import Excepciones.PersistenciaException;
+import dto.IngredienteProductoDTO;
 import exception.NegocioException;
 import interfaces.IIngredientesProductosBO;
 import java.util.ArrayList;

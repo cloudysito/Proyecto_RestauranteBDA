@@ -4,6 +4,10 @@
  */
 package interfaces;
 
+import Dominio.EstadoMesa;
+import Dominio.Mesa;
+import dto.NuevaMesaDTO;
+import exception.NegocioException;
 import java.util.List;
 
 /**

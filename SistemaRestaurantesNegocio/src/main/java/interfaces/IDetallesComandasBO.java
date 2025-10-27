@@ -4,6 +4,11 @@
  */
 package interfaces;
 
+import Dominio.DetalleComanda;
+import dto.ComandaDTO;
+import dto.DetalleComandaDTO;
+import dto.ProductoSeleccionadoDTO;
+import exception.NegocioException;
 import java.util.List;
 
 /**
