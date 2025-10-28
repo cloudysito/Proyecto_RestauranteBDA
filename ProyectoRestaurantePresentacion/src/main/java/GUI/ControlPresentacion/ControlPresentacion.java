@@ -17,12 +17,15 @@ import Dominio.Ingrediente;
 import Dominio.Mesa;
 import Dominio.UnidadMedida;
 import GUI.AñadirStockIngrediente;
+import GUI.ConfirmacionInicioComandanda;
 import GUI.EditarNombreIngrediente;
 import GUI.ListaClientes;
+import GUI.ListaIngredientes;
 import GUI.Mesas;
 import GUI.PerfilCliente;
 import GUI.RegistrarCliente;
 import GUI.ResumenComanda;
+import GUI.SeleccionarProductosComanda;
 import GUI.VentanaInicioComanda;
 import GUI.VentanaPrincipal;
 import dto.ClienteFrecuenteDTO;
@@ -188,14 +191,14 @@ public class ControlPresentacion {
 
 
     public void mostrarConfirmacionInicioComanda(Mesa mesa, VentanaInicioComanda ventanaInicioComanda) {
-        ConfirmacionInicioComanda confirmacionInicioComanda = new ConfirmacionInicioComanda(this, mesa, ventanaInicioComanda, comandasBO, mesasBO);
+        ConfirmacionInicioComandanda confirmacionInicioComanda = new ConfirmacionInicioComandanda(this, mesa, ventanaInicioComanda, comandasBO, mesasBO);
 
         confirmacionInicioComanda.setBounds(0, 0,
                 ventanaInicioComanda.getWidth(),
                 ventanaInicioComanda.getHeight()
         );
 
-        ventanaInicioComanda.getLayeredPane().add(confirmacionInicioComanda, JLayeredPane.MODAL_LAYER);
+//        ventanaInicioComanda.getLayeredPane().add(confirmacionInicioComanda, JLayeredPane.MODAL_LAYER);
 
         confirmacionInicioComanda.setVisible(true);
         ventanaInicioComanda.revalidate();

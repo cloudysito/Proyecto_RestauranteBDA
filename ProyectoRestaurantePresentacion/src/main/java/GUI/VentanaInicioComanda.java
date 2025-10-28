@@ -4,17 +4,96 @@
  */
 package GUI;
 
+import Dominio.Mesa;
+import GUI.ControlPresentacion.ControlPresentacion;
+import exception.NegocioException;
+import interfaces.IComandasBO;
+import interfaces.IMesasBO;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+
 /**
  *
  * @author riosr
  */
 public class VentanaInicioComanda extends javax.swing.JPanel {
 
-    /**
-     * Creates new form GUIa
-     */
+    FontManager fontManager = new FontManager();
+    private ControlPresentacion control;
+    private IComandasBO comandasBO;
+    private IMesasBO mesasBO;
+    private List<Mesa> mesas;
+    private static final Logger LOG = Logger.getLogger(VentanaInicioComanda.class.getName());
+
     public VentanaInicioComanda() {
         initComponents();
+    }
+
+    public VentanaInicioComanda(ControlPresentacion control, IMesasBO mesasBO) {
+        this.control = control;
+        this.mesasBO = mesasBO;
+        initComponents();
+        
+        jScrollPaneMesas.setOpaque(false);
+        jScrollPaneMesas.getViewport().setOpaque(false);
+        jScrollPaneMesas.setBorder(BorderFactory.createEmptyBorder());
+        jScrollPaneMesas.setViewportBorder(BorderFactory.createEmptyBorder());
+        jScrollPaneMesas.setBackground(new Color(0, 0, 0, 0));
+        jScrollPaneMesas.getVerticalScrollBar().setOpaque(false);
+        jScrollPaneMesas.getVerticalScrollBar().setUnitIncrement(16);
+        
+        jPanelMesas.setOpaque(false);
+        jPanelMesas.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        
+//        setLocationRelativeTo(null);
+        cargarMesas();
+    }
+    
+    private void cargarMesas() {
+        try {
+            mesas = mesasBO.mostrarMesas();
+            
+            jPanelMesas.setLayout(new java.awt.GridLayout(0, 5, 10, 10));            
+            
+            for (Mesa mesa : mesas) {
+                PanelMesaComanda btnMesa = new PanelMesaComanda(mesa, this, control);
+                btnMesa.setPreferredSize(new Dimension(120, 120));
+                jPanelMesas.add(btnMesa);
+            }
+            
+            int mesasFaltantes = (5 - (mesas.size() % 5)) % 5;
+            for (int i = 0; i < mesasFaltantes; i++) {
+                JPanel panelVacio = new JPanel();
+                panelVacio.setOpaque(false);
+                jPanelMesas.add(panelVacio);
+            }
+            
+        } catch (NegocioException ex) {
+            LOG.log(Level.SEVERE, "Error al cargar mesas", ex);
+        }
+        
+        jPanelMesas.revalidate();
+        jPanelMesas.repaint();
+    }
+    
+    public void iniciarNuevaComanda(Mesa mesa) {
+        System.out.println("Intentando mostrar confirmación para la mesa: " + mesa.getNumeroMesa());
+        control.mostrarConfirmacionInicioComanda(mesa, this);
+        
+    }
+    
+    public void mostrar() {
+        setVisible(true);
+    }
+    
+    public void cerrar() {
+        setVisible(false);
+//        dispose();
     }
 
     /**
@@ -29,13 +108,13 @@ public class VentanaInicioComanda extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnMesasRegresar = new javax.swing.JButton();
-        ScrollPaneMesas = new javax.swing.JScrollPane();
-        MesasPanelMesas = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jScrollPaneMesas = new javax.swing.JScrollPane();
+        jPanelMesas = new javax.swing.JPanel();
 
         jPanel1.setBackground(new java.awt.Color(124, 184, 245));
 
@@ -50,19 +129,6 @@ public class VentanaInicioComanda extends javax.swing.JPanel {
                 btnMesasRegresarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout MesasPanelMesasLayout = new javax.swing.GroupLayout(MesasPanelMesas);
-        MesasPanelMesas.setLayout(MesasPanelMesasLayout);
-        MesasPanelMesasLayout.setHorizontalGroup(
-            MesasPanelMesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
-        );
-        MesasPanelMesasLayout.setVerticalGroup(
-            MesasPanelMesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
-        );
-
-        ScrollPaneMesas.setViewportView(MesasPanelMesas);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
         jLabel2.setText("Disponible");
@@ -129,6 +195,8 @@ public class VentanaInicioComanda extends javax.swing.JPanel {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
+        jScrollPaneMesas.setViewportView(jPanelMesas);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -136,15 +204,15 @@ public class VentanaInicioComanda extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(16, 528, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnMesasRegresar)
-                            .addComponent(ScrollPaneMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 41, Short.MAX_VALUE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPaneMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 45, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,9 +221,9 @@ public class VentanaInicioComanda extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(ScrollPaneMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jScrollPaneMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addComponent(btnMesasRegresar)
                 .addGap(21, 21, 21))
         );
@@ -174,12 +242,12 @@ public class VentanaInicioComanda extends javax.swing.JPanel {
 
     private void btnMesasRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesasRegresarActionPerformed
         // TODO add your handling code here:
+        cerrar();
+        control.mostrarVentanaPrincipal();
     }//GEN-LAST:event_btnMesasRegresarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel MesasPanelMesas;
-    private javax.swing.JScrollPane ScrollPaneMesas;
     private javax.swing.JButton btnMesasRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -188,5 +256,7 @@ public class VentanaInicioComanda extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanelMesas;
+    private javax.swing.JScrollPane jScrollPaneMesas;
     // End of variables declaration//GEN-END:variables
 }
