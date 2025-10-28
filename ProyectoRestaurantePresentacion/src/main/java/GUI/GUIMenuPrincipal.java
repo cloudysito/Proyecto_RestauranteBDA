@@ -28,55 +28,55 @@ public class GUIMenuPrincipal extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        MenuPrincipalEmpleados = new javax.swing.JButton();
-        MenuPrincipalMesas = new javax.swing.JButton();
-        MenuPrincipalClientes = new javax.swing.JButton();
-        MenuPrincipalIngredientes = new javax.swing.JButton();
-        MenuPrincipalComandas = new javax.swing.JButton();
-        MenuPrincipalSalir = new javax.swing.JButton();
-        MenuPrincipalProductos = new javax.swing.JButton();
+        btnMenuPrincipalEmpleados = new javax.swing.JButton();
+        btnMenuPrincipalMesas = new javax.swing.JButton();
+        btnMenuPrincipalClientes = new javax.swing.JButton();
+        btnMenuPrincipalIngredientes = new javax.swing.JButton();
+        btnMenuPrincipalComandas = new javax.swing.JButton();
+        btnMenuPrincipalSalir = new javax.swing.JButton();
+        btnMenuPrincipalProductos = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(124, 184, 245));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Variable", 1, 48)); // NOI18N
         jLabel1.setText("Menú Principal");
 
-        MenuPrincipalEmpleados.setBackground(new java.awt.Color(161, 173, 185));
-        MenuPrincipalEmpleados.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
-        MenuPrincipalEmpleados.setText("Empleados");
-        MenuPrincipalEmpleados.addActionListener(new java.awt.event.ActionListener() {
+        btnMenuPrincipalEmpleados.setBackground(new java.awt.Color(161, 173, 185));
+        btnMenuPrincipalEmpleados.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        btnMenuPrincipalEmpleados.setText("Empleados");
+        btnMenuPrincipalEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuPrincipalEmpleadosActionPerformed(evt);
+                btnMenuPrincipalEmpleadosActionPerformed(evt);
             }
         });
 
-        MenuPrincipalMesas.setBackground(new java.awt.Color(161, 173, 185));
-        MenuPrincipalMesas.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
-        MenuPrincipalMesas.setText("Mesas");
+        btnMenuPrincipalMesas.setBackground(new java.awt.Color(161, 173, 185));
+        btnMenuPrincipalMesas.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        btnMenuPrincipalMesas.setText("Mesas");
 
-        MenuPrincipalClientes.setBackground(new java.awt.Color(161, 173, 185));
-        MenuPrincipalClientes.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
-        MenuPrincipalClientes.setText("Clientes");
+        btnMenuPrincipalClientes.setBackground(new java.awt.Color(161, 173, 185));
+        btnMenuPrincipalClientes.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        btnMenuPrincipalClientes.setText("Clientes");
 
-        MenuPrincipalIngredientes.setBackground(new java.awt.Color(161, 173, 185));
-        MenuPrincipalIngredientes.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
-        MenuPrincipalIngredientes.setText("Ingredientes");
+        btnMenuPrincipalIngredientes.setBackground(new java.awt.Color(161, 173, 185));
+        btnMenuPrincipalIngredientes.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        btnMenuPrincipalIngredientes.setText("Ingredientes");
 
-        MenuPrincipalComandas.setBackground(new java.awt.Color(161, 173, 185));
-        MenuPrincipalComandas.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
-        MenuPrincipalComandas.setText("Comandas");
+        btnMenuPrincipalComandas.setBackground(new java.awt.Color(161, 173, 185));
+        btnMenuPrincipalComandas.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        btnMenuPrincipalComandas.setText("Comandas");
 
-        MenuPrincipalSalir.setBackground(new java.awt.Color(255, 122, 122));
-        MenuPrincipalSalir.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        MenuPrincipalSalir.setText("Salir");
+        btnMenuPrincipalSalir.setBackground(new java.awt.Color(255, 122, 122));
+        btnMenuPrincipalSalir.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        btnMenuPrincipalSalir.setText("Salir");
 
-        MenuPrincipalProductos.setBackground(new java.awt.Color(161, 173, 185));
-        MenuPrincipalProductos.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
-        MenuPrincipalProductos.setText("Productos");
-        MenuPrincipalProductos.setActionCommand("");
-        MenuPrincipalProductos.addActionListener(new java.awt.event.ActionListener() {
+        btnMenuPrincipalProductos.setBackground(new java.awt.Color(161, 173, 185));
+        btnMenuPrincipalProductos.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        btnMenuPrincipalProductos.setText("Productos");
+        btnMenuPrincipalProductos.setActionCommand("");
+        btnMenuPrincipalProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuPrincipalProductosActionPerformed(evt);
+                btnMenuPrincipalProductosActionPerformed(evt);
             }
         });
 
@@ -85,24 +85,24 @@ public class GUIMenuPrincipal extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 144, Short.MAX_VALUE)
+                .addGap(0, 141, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(191, 191, 191))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(MenuPrincipalSalir))
+                        .addComponent(btnMenuPrincipalSalir))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(265, 265, 265)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(MenuPrincipalEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(MenuPrincipalComandas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(MenuPrincipalMesas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(MenuPrincipalClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(MenuPrincipalProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(MenuPrincipalIngredientes, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))))
-                .addContainerGap(281, Short.MAX_VALUE))
+                            .addComponent(btnMenuPrincipalEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnMenuPrincipalComandas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnMenuPrincipalMesas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnMenuPrincipalClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnMenuPrincipalProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnMenuPrincipalIngredientes, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,19 +110,19 @@ public class GUIMenuPrincipal extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(MenuPrincipalEmpleados)
+                .addComponent(btnMenuPrincipalEmpleados)
                 .addGap(18, 18, 18)
-                .addComponent(MenuPrincipalComandas)
+                .addComponent(btnMenuPrincipalComandas)
                 .addGap(18, 18, 18)
-                .addComponent(MenuPrincipalMesas)
+                .addComponent(btnMenuPrincipalMesas)
                 .addGap(18, 18, 18)
-                .addComponent(MenuPrincipalClientes)
+                .addComponent(btnMenuPrincipalClientes)
                 .addGap(18, 18, 18)
-                .addComponent(MenuPrincipalProductos)
+                .addComponent(btnMenuPrincipalProductos)
                 .addGap(18, 18, 18)
-                .addComponent(MenuPrincipalIngredientes)
+                .addComponent(btnMenuPrincipalIngredientes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(MenuPrincipalSalir)
+                .addComponent(btnMenuPrincipalSalir)
                 .addGap(22, 22, 22))
         );
 
@@ -142,23 +142,23 @@ public class GUIMenuPrincipal extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MenuPrincipalEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPrincipalEmpleadosActionPerformed
+    private void btnMenuPrincipalEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalEmpleadosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MenuPrincipalEmpleadosActionPerformed
+    }//GEN-LAST:event_btnMenuPrincipalEmpleadosActionPerformed
 
-    private void MenuPrincipalProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPrincipalProductosActionPerformed
+    private void btnMenuPrincipalProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalProductosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MenuPrincipalProductosActionPerformed
+    }//GEN-LAST:event_btnMenuPrincipalProductosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton MenuPrincipalClientes;
-    private javax.swing.JButton MenuPrincipalComandas;
-    private javax.swing.JButton MenuPrincipalEmpleados;
-    private javax.swing.JButton MenuPrincipalIngredientes;
-    private javax.swing.JButton MenuPrincipalMesas;
-    private javax.swing.JButton MenuPrincipalProductos;
-    private javax.swing.JButton MenuPrincipalSalir;
+    private javax.swing.JButton btnMenuPrincipalClientes;
+    private javax.swing.JButton btnMenuPrincipalComandas;
+    private javax.swing.JButton btnMenuPrincipalEmpleados;
+    private javax.swing.JButton btnMenuPrincipalIngredientes;
+    private javax.swing.JButton btnMenuPrincipalMesas;
+    private javax.swing.JButton btnMenuPrincipalProductos;
+    private javax.swing.JButton btnMenuPrincipalSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

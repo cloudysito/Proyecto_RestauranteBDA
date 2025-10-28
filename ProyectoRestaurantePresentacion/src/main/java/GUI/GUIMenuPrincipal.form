@@ -43,7 +43,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="144" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="141" max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="362" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
               </Group>
@@ -51,21 +51,21 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                          <Component id="MenuPrincipalSalir" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnMenuPrincipalSalir" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="265" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="MenuPrincipalEmpleados" max="32767" attributes="0"/>
-                              <Component id="MenuPrincipalComandas" alignment="1" max="32767" attributes="0"/>
-                              <Component id="MenuPrincipalMesas" max="32767" attributes="0"/>
-                              <Component id="MenuPrincipalClientes" alignment="1" max="32767" attributes="0"/>
-                              <Component id="MenuPrincipalProductos" alignment="1" max="32767" attributes="0"/>
-                              <Component id="MenuPrincipalIngredientes" alignment="1" pref="151" max="32767" attributes="0"/>
+                              <Component id="btnMenuPrincipalEmpleados" max="32767" attributes="0"/>
+                              <Component id="btnMenuPrincipalComandas" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnMenuPrincipalMesas" max="32767" attributes="0"/>
+                              <Component id="btnMenuPrincipalClientes" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnMenuPrincipalProductos" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnMenuPrincipalIngredientes" alignment="1" pref="151" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="281" max="32767" attributes="0"/>
+                  <EmptySpace pref="278" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -75,19 +75,19 @@
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="79" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="MenuPrincipalEmpleados" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnMenuPrincipalEmpleados" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="MenuPrincipalComandas" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnMenuPrincipalComandas" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="MenuPrincipalMesas" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnMenuPrincipalMesas" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="MenuPrincipalClientes" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnMenuPrincipalClientes" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="MenuPrincipalProductos" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnMenuPrincipalProductos" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="MenuPrincipalIngredientes" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnMenuPrincipalIngredientes" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="52" max="32767" attributes="0"/>
-                  <Component id="MenuPrincipalSalir" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnMenuPrincipalSalir" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -102,7 +102,7 @@
             <Property name="text" type="java.lang.String" value="Men&#xfa; Principal"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="MenuPrincipalEmpleados">
+        <Component class="javax.swing.JButton" name="btnMenuPrincipalEmpleados">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b9" green="ad" red="a1" type="rgb"/>
@@ -113,10 +113,10 @@
             <Property name="text" type="java.lang.String" value="Empleados"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuPrincipalEmpleadosActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuPrincipalEmpleadosActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="MenuPrincipalMesas">
+        <Component class="javax.swing.JButton" name="btnMenuPrincipalMesas">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b9" green="ad" red="a1" type="rgb"/>
@@ -127,7 +127,7 @@
             <Property name="text" type="java.lang.String" value="Mesas"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="MenuPrincipalClientes">
+        <Component class="javax.swing.JButton" name="btnMenuPrincipalClientes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b9" green="ad" red="a1" type="rgb"/>
@@ -138,7 +138,7 @@
             <Property name="text" type="java.lang.String" value="Clientes"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="MenuPrincipalIngredientes">
+        <Component class="javax.swing.JButton" name="btnMenuPrincipalIngredientes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b9" green="ad" red="a1" type="rgb"/>
@@ -149,7 +149,7 @@
             <Property name="text" type="java.lang.String" value="Ingredientes"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="MenuPrincipalComandas">
+        <Component class="javax.swing.JButton" name="btnMenuPrincipalComandas">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b9" green="ad" red="a1" type="rgb"/>
@@ -160,7 +160,7 @@
             <Property name="text" type="java.lang.String" value="Comandas"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="MenuPrincipalSalir">
+        <Component class="javax.swing.JButton" name="btnMenuPrincipalSalir">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="7a" green="7a" red="ff" type="rgb"/>
@@ -171,7 +171,7 @@
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="MenuPrincipalProductos">
+        <Component class="javax.swing.JButton" name="btnMenuPrincipalProductos">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b9" green="ad" red="a1" type="rgb"/>
@@ -183,7 +183,7 @@
             <Property name="actionCommand" type="java.lang.String" value=""/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuPrincipalProductosActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuPrincipalProductosActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
