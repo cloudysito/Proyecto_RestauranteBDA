@@ -8,12 +8,12 @@ package GUI;
  *
  * @author riosr
  */
-public class GUIRegistrarCliente extends javax.swing.JPanel {
+public class RegistrarCliente extends javax.swing.JPanel {
 
     /**
      * Creates new form GUIRegistrarCliente
      */
-    public GUIRegistrarCliente() {
+    public RegistrarCliente() {
         initComponents();
     }
 

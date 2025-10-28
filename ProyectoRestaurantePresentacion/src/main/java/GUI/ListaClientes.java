@@ -8,12 +8,12 @@ package GUI;
  *
  * @author riosr
  */
-public class GUIClientes extends javax.swing.JPanel {
+public class ListaClientes extends javax.swing.JPanel {
 
     /**
      * Creates new form GUICliente
      */
-    public GUIClientes() {
+    public ListaClientes() {
         initComponents();
     }
 
@@ -111,13 +111,10 @@ public class GUIClientes extends javax.swing.JPanel {
                             .addComponent(btnClientesBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)))
                 .addComponent(ScrollPaneClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClientesRegresar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClientesAgregar)))
+                    .addComponent(btnClientesRegresar)
+                    .addComponent(btnClientesAgregar))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 

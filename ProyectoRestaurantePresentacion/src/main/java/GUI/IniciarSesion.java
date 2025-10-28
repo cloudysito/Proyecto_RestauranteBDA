@@ -4,17 +4,49 @@
  */
 package GUI;
 
+import GUI.ControlPresentacion.ControlPresentacion;
+import dto.EmpleadoDTO;
+import exception.NegocioException;
+import interfaces.IEmpleadosBO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author riosr
  */
-public class GUIInicioSesion extends javax.swing.JFrame {
+public class IniciarSesion extends javax.swing.JFrame {
 
+    ControlPresentacion control;
+    IEmpleadosBO empleadosBO;
+    
+    FontManager fontManager = new FontManager();
+    
     /**
      * Creates new form GUIInicioSesion
      */
-    public GUIInicioSesion() {
+    public IniciarSesion() {
         initComponents();
+    }
+
+     public IniciarSesion(ControlPresentacion control, IEmpleadosBO empleadosBO) {
+        this.control = control;
+        this.empleadosBO = empleadosBO;
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        jTextFieldUsuario.setOpaque(false);
+        jPasswordField.setOpaque(false);
+    }
+     
+     public void mostrar(){
+        setVisible(true);
+    }
+    
+    public void cerrar(){
+        setVisible(false);
+        dispose();
     }
 
     /**
@@ -30,8 +62,8 @@ public class GUIInicioSesion extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnInicioSesionContinuar = new javax.swing.JButton();
-        txtInicioSesionUsuario = new javax.swing.JTextField();
-        txtInicioSesionContrasena = new javax.swing.JTextField();
+        jTextFieldUsuario = new javax.swing.JTextField();
+        jPasswordField = new javax.swing.JTextField();
         btnInicioSesionContinuar1 = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
@@ -52,18 +84,16 @@ public class GUIInicioSesion extends javax.swing.JFrame {
             }
         });
 
-        txtInicioSesionUsuario.setFont(new java.awt.Font("Segoe UI Variable", 1, 24)); // NOI18N
-        txtInicioSesionUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtInicioSesionUsuario.setText("Usuario");
-        txtInicioSesionUsuario.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldUsuario.setFont(new java.awt.Font("Segoe UI Variable", 1, 24)); // NOI18N
+        jTextFieldUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtInicioSesionUsuarioActionPerformed(evt);
+                jTextFieldUsuarioActionPerformed(evt);
             }
         });
 
-        txtInicioSesionContrasena.setFont(new java.awt.Font("Segoe UI Variable", 1, 24)); // NOI18N
-        txtInicioSesionContrasena.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtInicioSesionContrasena.setText("Contraseña");
+        jPasswordField.setFont(new java.awt.Font("Segoe UI Variable", 1, 24)); // NOI18N
+        jPasswordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         btnInicioSesionContinuar1.setBackground(new java.awt.Color(255, 122, 122));
         btnInicioSesionContinuar1.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
@@ -81,8 +111,8 @@ public class GUIInicioSesion extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtInicioSesionUsuario)
-                    .addComponent(txtInicioSesionContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
+                    .addComponent(jTextFieldUsuario)
+                    .addComponent(jPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
                 .addGap(250, 250, 250))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(185, Short.MAX_VALUE)
@@ -102,9 +132,9 @@ public class GUIInicioSesion extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
-                .addComponent(txtInicioSesionUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(txtInicioSesionContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addComponent(btnInicioSesionContinuar)
                 .addGap(41, 41, 41)
@@ -128,50 +158,35 @@ public class GUIInicioSesion extends javax.swing.JFrame {
 
     private void btnInicioSesionContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionContinuarActionPerformed
         // TODO add your handling code here:
+         String nombreUsuario = this.jTextFieldUsuario.getText();
+        String contraseña = this.jPasswordField.getText();
+        EmpleadoDTO empleado = new EmpleadoDTO();
+
+        
+        try {
+            empleado = empleadosBO.iniciarSesion(nombreUsuario,contraseña);
+        } catch (NegocioException ex) {
+            Logger.getLogger(IniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (empleado != null) {
+            control.iniciarFlujo(empleado.getIdRol());
+            cerrar();
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo iniciar sesión. Verifica tu usuario y contraseña.", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnInicioSesionContinuarActionPerformed
 
-    private void txtInicioSesionUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInicioSesionUsuarioActionPerformed
+    private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtInicioSesionUsuarioActionPerformed
+    }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
 
     private void btnInicioSesionContinuar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionContinuar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnInicioSesionContinuar1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUIInicioSesion().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInicioSesionContinuar;
@@ -179,7 +194,7 @@ public class GUIInicioSesion extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtInicioSesionContrasena;
-    private javax.swing.JTextField txtInicioSesionUsuario;
+    private javax.swing.JTextField jPasswordField;
+    private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 }

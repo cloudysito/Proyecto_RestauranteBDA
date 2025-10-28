@@ -8,12 +8,12 @@ package GUI;
  *
  * @author riosr
  */
-public class GUIMenuPrincipal extends javax.swing.JPanel {
+public class VentanaPrincipal extends javax.swing.JPanel {
 
     /**
      * Creates new form GUIMenuPrincipal
      */
-    public GUIMenuPrincipal() {
+    public VentanaPrincipal() {
         initComponents();
     }
 

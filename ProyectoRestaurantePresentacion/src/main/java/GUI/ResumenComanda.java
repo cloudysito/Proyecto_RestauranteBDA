@@ -8,12 +8,12 @@ package GUI;
  *
  * @author riosr
  */
-public class GUIMesas extends javax.swing.JPanel {
+public class ResumenComanda extends javax.swing.JPanel {
 
     /**
-     * Creates new form GUIa
+     * Creates new form GUIResumenComanda
      */
-    public GUIMesas() {
+    public ResumenComanda() {
         initComponents();
     }
 
@@ -28,7 +28,7 @@ public class GUIMesas extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnMesasRegresar = new javax.swing.JButton();
+        MesasRegresar = new javax.swing.JButton();
         ScrollPaneMesas = new javax.swing.JScrollPane();
         MesasPanelMesas = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -40,14 +40,14 @@ public class GUIMesas extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(124, 184, 245));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Variable", 1, 48)); // NOI18N
-        jLabel1.setText("Mesas");
+        jLabel1.setText("Resumen Comanda");
 
-        btnMesasRegresar.setBackground(new java.awt.Color(255, 122, 122));
-        btnMesasRegresar.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        btnMesasRegresar.setText("Regresar");
-        btnMesasRegresar.addActionListener(new java.awt.event.ActionListener() {
+        MesasRegresar.setBackground(new java.awt.Color(255, 122, 122));
+        MesasRegresar.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        MesasRegresar.setText("Salir");
+        MesasRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMesasRegresarActionPerformed(evt);
+                MesasRegresarActionPerformed(evt);
             }
         });
 
@@ -136,15 +136,15 @@ public class GUIMesas extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(16, 590, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnMesasRegresar)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ScrollPaneMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 41, Short.MAX_VALUE))
+                            .addComponent(MesasRegresar)
+                            .addComponent(ScrollPaneMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 64, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +156,7 @@ public class GUIMesas extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(ScrollPaneMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMesasRegresar)
+                .addComponent(MesasRegresar)
                 .addGap(21, 21, 21))
         );
 
@@ -172,15 +172,15 @@ public class GUIMesas extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnMesasRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesasRegresarActionPerformed
+    private void MesasRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MesasRegresarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnMesasRegresarActionPerformed
+    }//GEN-LAST:event_MesasRegresarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MesasPanelMesas;
+    private javax.swing.JButton MesasRegresar;
     private javax.swing.JScrollPane ScrollPaneMesas;
-    private javax.swing.JButton btnMesasRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
