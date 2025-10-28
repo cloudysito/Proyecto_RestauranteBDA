@@ -18,13 +18,11 @@ public class FontManager {
     
     public FontManager() {
         try {
-            greatVibesRegular = loadFont("/fonts/GreatVibes-Regular.ttf");
-
-            notoSerifCondensedRegular = loadFont("/fonts/NotoSerif_Condensed-Regular.ttf");
-
-            nunitoRegular = loadFont("/fonts/Nunito-Regular.ttf");
-            nunitoBold = loadFont("/fonts/Nunito-Bold.ttf");
-            nunitoSemiBold = loadFont("/fonts/Nunito-SemiBold.ttf");
+            greatVibesRegular = new Font("Serif", Font.PLAIN, 12);
+            notoSerifCondensedRegular = new Font("Serif", Font.PLAIN, 12);
+            nunitoRegular = new Font("SansSerif", Font.PLAIN, 12);
+            nunitoBold = new Font("SansSerif", Font.BOLD, 12);
+            nunitoSemiBold = new Font("SansSerif", Font.BOLD, 12);
 
             registerFonts();
             

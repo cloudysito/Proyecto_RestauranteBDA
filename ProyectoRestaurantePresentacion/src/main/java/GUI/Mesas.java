@@ -4,19 +4,64 @@
  */
 package GUI;
 
+import Dominio.Mesa;
+import GUI.ControlPresentacion.ControlPresentacion;
+import dto.NuevaMesaDTO;
+import exception.NegocioException;
+import interfaces.IMesasBO;
+import java.util.List;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author riosr
  */
 public class Mesas extends javax.swing.JPanel {
 
+     private ControlPresentacion control;
+    private IMesasBO mesasBO;
+    private List<Mesa> mesas;
+    private static final Logger LOG = Logger.getLogger(Mesas.class.getName());
+    
+    
     /**
-     * Creates new form GUIa
+     * Creates new form Mesas
      */
     public Mesas() {
         initComponents();
     }
 
+    public Mesas(ControlPresentacion control, IMesasBO mesasBO) {
+        this.control = control;
+        initComponents();
+        this.mesasBO = mesasBO;
+//        setLocationRelativeTo(null);
+        mostrarMesas();
+    }
+    
+    public void mostrarMesas(){
+        try {
+            for (Mesa mesa : mesasBO.mostrarMesas()) { 
+                panelMesas.add(new PanelMesas(mesa.getNumeroMesa(), mesa.getEstado()));
+            }
+        } catch (NegocioException ex) {
+            LOG.severe("No se pudo llenar la tabla de mesas: " + ex.getMessage());
+        }
+
+        panelMesas.revalidate();
+        panelMesas.repaint();
+        
+    }
+    
+    public void mostrar(){
+        setVisible(true);
+    }
+    
+    public void cerrar(){
+        setVisible(false);
+//        dispose();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,13 +74,14 @@ public class Mesas extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnMesasRegresar = new javax.swing.JButton();
-        ScrollPaneMesas = new javax.swing.JScrollPane();
-        MesasPanelMesas = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        btnMesasRegresar1 = new javax.swing.JButton();
+        jScrollPaneMesas = new javax.swing.JScrollPane();
+        panelMesas = new javax.swing.JPanel();
 
         jPanel1.setBackground(new java.awt.Color(124, 184, 245));
 
@@ -50,19 +96,6 @@ public class Mesas extends javax.swing.JPanel {
                 btnMesasRegresarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout MesasPanelMesasLayout = new javax.swing.GroupLayout(MesasPanelMesas);
-        MesasPanelMesas.setLayout(MesasPanelMesasLayout);
-        MesasPanelMesasLayout.setHorizontalGroup(
-            MesasPanelMesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
-        );
-        MesasPanelMesasLayout.setVerticalGroup(
-            MesasPanelMesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
-        );
-
-        ScrollPaneMesas.setViewportView(MesasPanelMesas);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Variable", 1, 12)); // NOI18N
         jLabel2.setText("Disponible");
@@ -129,6 +162,24 @@ public class Mesas extends javax.swing.JPanel {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
+        btnMesasRegresar1.setBackground(new java.awt.Color(153, 255, 153));
+        btnMesasRegresar1.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        btnMesasRegresar1.setText("Agregar");
+        btnMesasRegresar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMesasRegresar1ActionPerformed(evt);
+            }
+        });
+
+        jScrollPaneMesas.setBackground(new java.awt.Color(29, 39, 56));
+        jScrollPaneMesas.setBorder(null);
+        jScrollPaneMesas.setForeground(new java.awt.Color(29, 39, 56));
+
+        panelMesas.setBackground(new java.awt.Color(204, 204, 204));
+        panelMesas.setForeground(new java.awt.Color(204, 204, 204));
+        panelMesas.setLayout(new java.awt.GridLayout(0, 5));
+        jScrollPaneMesas.setViewportView(panelMesas);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -141,10 +192,17 @@ public class Mesas extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnMesasRegresar)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ScrollPaneMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnMesasRegresar)
+                                .addGap(501, 501, 501)
+                                .addComponent(btnMesasRegresar1)))
+                        .addGap(42, 42, 42)))
                 .addGap(0, 41, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(jScrollPaneMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,11 +211,17 @@ public class Mesas extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(ScrollPaneMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMesasRegresar)
-                .addGap(21, 21, 21))
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPaneMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(btnMesasRegresar1)
+                        .addContainerGap(48, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMesasRegresar)
+                        .addGap(21, 21, 21))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -174,13 +238,34 @@ public class Mesas extends javax.swing.JPanel {
 
     private void btnMesasRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesasRegresarActionPerformed
         // TODO add your handling code here:
+        cerrar();
+        control.mostrarVentanaPrincipal();
     }//GEN-LAST:event_btnMesasRegresarActionPerformed
+
+    private void btnMesasRegresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesasRegresar1ActionPerformed
+        // TODO add your handling code here:
+        
+        List<Mesa> nuevasMesas = null;
+        try {
+            nuevasMesas = mesasBO.agregarMesas(new NuevaMesaDTO()); 
+            JOptionPane.showMessageDialog(this, "Se agregaron las mesas correctamente.");
+        } catch (NegocioException ex) {
+            LOG.severe("No se pudo llenar la tabla de mesas: " + ex.getMessage());
+        }
+
+        mesas = nuevasMesas;
+        
+        for (Mesa mesa : mesas) {
+            panelMesas.add(new PanelMesas(mesa.getNumeroMesa(), mesa.getEstado())); 
+        }
+        
+        jScrollPaneMesas.setViewportView(panelMesas);
+    }//GEN-LAST:event_btnMesasRegresar1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel MesasPanelMesas;
-    private javax.swing.JScrollPane ScrollPaneMesas;
     private javax.swing.JButton btnMesasRegresar;
+    private javax.swing.JButton btnMesasRegresar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -188,5 +273,7 @@ public class Mesas extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPaneMesas;
+    private javax.swing.JPanel panelMesas;
     // End of variables declaration//GEN-END:variables
 }

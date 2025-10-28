@@ -21,7 +21,7 @@ import org.w3c.dom.events.DocumentEvent;
 
 /**
  *
- * @author Dana Chavez
+ * @author santi
  */
 public class PanelProductoSeleccionado extends JPanel {
      private JTextField txtCantidad;

@@ -4,6 +4,13 @@
  */
 package GUI;
 
+import GUI.ControlPresentacion.ControlPresentacion;
+import dto.NuevoClienteFrecuenteDTO;
+import exception.NegocioException;
+import interfaces.IClientesBO;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author riosr
@@ -13,8 +20,57 @@ public class RegistrarCliente extends javax.swing.JPanel {
     /**
      * Creates new form GUIRegistrarCliente
      */
-    public RegistrarCliente() {
+    private IClientesBO clientesBO;
+    private ControlPresentacion control;
+    private static final Logger LOG = Logger.getLogger(RegistrarCliente.class.getName());
+    FontManager fontManager = new FontManager();
+ 
+    /**
+     * Creates new form ListaClientes
+     */
+
+    public RegistrarCliente(ControlPresentacion control, IClientesBO clientesBO) {
+        this.control = control;
+        this.clientesBO = clientesBO;
         initComponents();
+//        setLocationRelativeTo(null);
+    }
+    
+    public void registrar(){        
+        String nombre = this.jTextFieldNombres.getText();
+        String apellidoPaterno = this.jTextFieldApellidoPaterno.getText();
+        String apellidoMaterno = this.jTextFieldApellidoMaterno.getText();
+        String correoElectronico = this.jTextFieldCorreoElectronico.getText();
+        String telefono = this.jTextFieldTelefono.getText();
+        
+        NuevoClienteFrecuenteDTO nuevoCliente = new NuevoClienteFrecuenteDTO(nombre, apellidoPaterno, apellidoMaterno, correoElectronico, telefono);
+        
+        try {
+            this.clientesBO.registrarCliente(nuevoCliente);
+            JOptionPane.showMessageDialog(this, "Se registro el cliente con exito","Informacion", JOptionPane.INFORMATION_MESSAGE);
+            this.limpiarFormulario();
+        } catch (NegocioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(),"Informacion", JOptionPane.ERROR_MESSAGE);
+            LOG.severe("No fue posible registrar el cliente" + ex.getMessage());
+        }     
+    }
+    
+    public void limpiarFormulario(){
+        this.jTextFieldNombres.setText("    Nombre");
+        this.jTextFieldApellidoPaterno.setText("    Apellido Paterno");
+        this.jTextFieldApellidoMaterno.setText("    Apellido Materno");
+        this.jTextFieldCorreoElectronico.setText("    Correo Electronico");
+        this.jTextFieldTelefono.setText("    Telefono");
+        
+    }
+    
+    public void mostrar(){
+        setVisible(true);
+    }
+    
+    public void cerrar(){
+        setVisible(false);
+//        dispose();
     }
 
     /**
@@ -29,12 +85,12 @@ public class RegistrarCliente extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         MesasRegresar = new javax.swing.JButton();
-        ScrollPaneMesas = new javax.swing.JScrollPane();
-        MesasPanelMesas = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        jButtonRegistrar = new javax.swing.JButton();
+        jTextFieldCorreoElectronico = new javax.swing.JTextField();
+        jTextFieldTelefono = new javax.swing.JTextField();
+        jTextFieldApellidoMaterno = new javax.swing.JTextField();
+        jTextFieldApellidoPaterno = new javax.swing.JTextField();
+        jTextFieldNombres = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(124, 184, 245));
 
@@ -50,73 +106,124 @@ public class RegistrarCliente extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout MesasPanelMesasLayout = new javax.swing.GroupLayout(MesasPanelMesas);
-        MesasPanelMesas.setLayout(MesasPanelMesasLayout);
-        MesasPanelMesasLayout.setHorizontalGroup(
-            MesasPanelMesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
-        );
-        MesasPanelMesasLayout.setVerticalGroup(
-            MesasPanelMesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
-        );
+        jButtonRegistrar.setText("Registrar");
+        jButtonRegistrar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonRegistrar.setContentAreaFilled(false);
+        jButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegistrarActionPerformed(evt);
+            }
+        });
 
-        ScrollPaneMesas.setViewportView(MesasPanelMesas);
+        jTextFieldCorreoElectronico.setFont(fontManager.getNunitoBold(16f));
+        jTextFieldCorreoElectronico.setText("    Correo Electronico");
+        jTextFieldCorreoElectronico.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jTextFieldCorreoElectronico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextFieldCorreoElectronicoMousePressed(evt);
+            }
+        });
+        jTextFieldCorreoElectronico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCorreoElectronicoActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
-        jLabel2.setText("Nombre Completo");
+        jTextFieldTelefono.setFont(fontManager.getNunitoBold(16f));
+        jTextFieldTelefono.setText("    Telefono");
+        jTextFieldTelefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jTextFieldTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextFieldTelefonoMousePressed(evt);
+            }
+        });
+        jTextFieldTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTelefonoActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
-        jTextField1.setText("Nombre");
+        jTextFieldApellidoMaterno.setFont(fontManager.getNunitoBold(16f));
+        jTextFieldApellidoMaterno.setText("    Apellido Materno");
+        jTextFieldApellidoMaterno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jTextFieldApellidoMaterno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextFieldApellidoMaternoMousePressed(evt);
+            }
+        });
+        jTextFieldApellidoMaterno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldApellidoMaternoActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
-        jTextField2.setText("Segundo Nombre");
+        jTextFieldApellidoPaterno.setFont(fontManager.getNunitoBold(16f));
+        jTextFieldApellidoPaterno.setText("    Apellido Paterno");
+        jTextFieldApellidoPaterno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jTextFieldApellidoPaterno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextFieldApellidoPaternoMousePressed(evt);
+            }
+        });
+        jTextFieldApellidoPaterno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldApellidoPaternoActionPerformed(evt);
+            }
+        });
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
-        jTextField3.setText("Apellidos");
+        jTextFieldNombres.setFont(fontManager.getNunitoBold(16f));
+        jTextFieldNombres.setText("    Nombre");
+        jTextFieldNombres.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jTextFieldNombres.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextFieldNombresMousePressed(evt);
+            }
+        });
+        jTextFieldNombres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNombresActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(555, 555, 555)
-                                .addComponent(ScrollPaneMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(MesasRegresar)
-                            .addComponent(jLabel1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 60, Short.MAX_VALUE))
+                    .addComponent(MesasRegresar)
+                    .addComponent(jLabel1))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(292, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(291, 291, 291))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(145, 145, 145)
-                .addComponent(ScrollPaneMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
+                .addComponent(jTextFieldNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jTextFieldApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jTextFieldApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jTextFieldCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jButtonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(MesasRegresar)
                 .addGap(21, 21, 21))
         );
@@ -125,9 +232,10 @@ public class RegistrarCliente extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,18 +245,134 @@ public class RegistrarCliente extends javax.swing.JPanel {
 
     private void MesasRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MesasRegresarActionPerformed
         // TODO add your handling code here:
+        cerrar();
+        control.mostrarListaClientes();
     }//GEN-LAST:event_MesasRegresarActionPerformed
+
+    private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
+        registrar();
+    }//GEN-LAST:event_jButtonRegistrarActionPerformed
+
+    private void jTextFieldCorreoElectronicoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldCorreoElectronicoMousePressed
+        if(jTextFieldNombres.getText().isEmpty()){
+            jTextFieldNombres.setText("    Nombre");
+        }
+        if(jTextFieldApellidoPaterno.getText().isEmpty()){
+            jTextFieldApellidoPaterno.setText("    Apellido Paterno");
+        }
+        if(jTextFieldApellidoMaterno.getText().isEmpty()){
+            jTextFieldApellidoMaterno.setText("    Apellido Materno");
+        }
+        if(jTextFieldTelefono.getText().isEmpty()){
+            jTextFieldTelefono.setText("    Telefono");
+        }
+        if(jTextFieldCorreoElectronico.getText().equals("    Correo Electronico")){
+            jTextFieldCorreoElectronico.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldCorreoElectronicoMousePressed
+
+    private void jTextFieldCorreoElectronicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCorreoElectronicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCorreoElectronicoActionPerformed
+
+    private void jTextFieldTelefonoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldTelefonoMousePressed
+        if(jTextFieldNombres.getText().isEmpty()){
+            jTextFieldNombres.setText("    Nombre");
+        }
+        if(jTextFieldApellidoPaterno.getText().isEmpty()){
+            jTextFieldApellidoPaterno.setText("    Apellido Paterno");
+        }
+        if(jTextFieldApellidoMaterno.getText().isEmpty()){
+            jTextFieldApellidoMaterno.setText("    Apellido Materno");
+        }
+        if(jTextFieldTelefono.getText().equals("    Telefono")){
+            jTextFieldTelefono.setText("");
+        }
+        if(jTextFieldCorreoElectronico.getText().isEmpty()){
+            jTextFieldCorreoElectronico.setText("    Correo Electronico");
+        }
+    }//GEN-LAST:event_jTextFieldTelefonoMousePressed
+
+    private void jTextFieldTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldTelefonoActionPerformed
+
+    private void jTextFieldApellidoMaternoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldApellidoMaternoMousePressed
+        if(jTextFieldNombres.getText().isEmpty()){
+            jTextFieldNombres.setText("    Nombre");
+        }
+        if(jTextFieldApellidoPaterno.getText().isEmpty()){
+            jTextFieldApellidoPaterno.setText("    Apellido Paterno");
+        }
+        if(jTextFieldApellidoMaterno.getText().equals("    Apellido Materno")){
+            jTextFieldApellidoMaterno.setText("");
+        }
+        if(jTextFieldTelefono.getText().isEmpty()){
+            jTextFieldTelefono.setText("    Telefono");
+        }
+        if(jTextFieldCorreoElectronico.getText().isEmpty()){
+            jTextFieldCorreoElectronico.setText("    Correo Electronico");
+        }
+    }//GEN-LAST:event_jTextFieldApellidoMaternoMousePressed
+
+    private void jTextFieldApellidoMaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldApellidoMaternoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldApellidoMaternoActionPerformed
+
+    private void jTextFieldApellidoPaternoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldApellidoPaternoMousePressed
+        if(jTextFieldNombres.getText().isEmpty()){
+            jTextFieldNombres.setText("    Nombre");
+        }
+        if(jTextFieldApellidoPaterno.getText().equals("    Apellido Paterno")){
+            jTextFieldApellidoPaterno.setText("");
+        }
+        if(jTextFieldApellidoMaterno.getText().isEmpty()){
+            jTextFieldApellidoMaterno.setText("    Apellido Materno");
+        }
+        if(jTextFieldTelefono.getText().isEmpty()){
+            jTextFieldTelefono.setText("    Telefono");
+        }
+        if(jTextFieldCorreoElectronico.getText().isEmpty()){
+            jTextFieldCorreoElectronico.setText("    Correo Electronico");
+        }
+    }//GEN-LAST:event_jTextFieldApellidoPaternoMousePressed
+
+    private void jTextFieldApellidoPaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldApellidoPaternoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldApellidoPaternoActionPerformed
+
+    private void jTextFieldNombresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNombresMousePressed
+        if(jTextFieldNombres.getText().equals("    Nombre")){
+            jTextFieldNombres.setText("");
+        }
+        if(jTextFieldApellidoPaterno.getText().isEmpty()){
+            jTextFieldApellidoPaterno.setText("    Apellido Paterno");
+        }
+        if(jTextFieldApellidoMaterno.getText().isEmpty()){
+            jTextFieldApellidoMaterno.setText("    Apellido Materno");
+        }
+        if(jTextFieldTelefono.getText().isEmpty()){
+            jTextFieldTelefono.setText("    Telefono");
+        }
+        if(jTextFieldCorreoElectronico.getText().isEmpty()){
+            jTextFieldCorreoElectronico.setText("    Correo Electronico");
+        }
+    }//GEN-LAST:event_jTextFieldNombresMousePressed
+
+    private void jTextFieldNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNombresActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel MesasPanelMesas;
     private javax.swing.JButton MesasRegresar;
-    private javax.swing.JScrollPane ScrollPaneMesas;
+    private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextFieldApellidoMaterno;
+    private javax.swing.JTextField jTextFieldApellidoPaterno;
+    private javax.swing.JTextField jTextFieldCorreoElectronico;
+    private javax.swing.JTextField jTextFieldNombres;
+    private javax.swing.JTextField jTextFieldTelefono;
     // End of variables declaration//GEN-END:variables
 }

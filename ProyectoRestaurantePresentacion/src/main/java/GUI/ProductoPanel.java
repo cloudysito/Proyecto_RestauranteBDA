@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author payde
+ * @author santi
  */
 
 public class ProductoPanel extends JPanel {

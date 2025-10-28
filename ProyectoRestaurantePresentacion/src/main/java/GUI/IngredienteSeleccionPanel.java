@@ -28,7 +28,7 @@ import javax.swing.SwingConstants;
 
 /**
  *
- * @author payde
+ * @author santi
  */
 public class IngredienteSeleccionPanel extends JPanel {
 

@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author payde
+ * @author santi
  */
 public class IngredienteVisualPanel extends JPanel{
     public IngredienteVisualPanel(String nombre, float cantidad, String unidad) {

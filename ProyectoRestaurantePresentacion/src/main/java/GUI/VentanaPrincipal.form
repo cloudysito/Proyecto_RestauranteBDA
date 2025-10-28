@@ -24,10 +24,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" min="-2" pref="495" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -48,24 +45,22 @@
                   <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                          <Component id="btnMenuPrincipalSalir" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="265" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="btnMenuPrincipalEmpleados" max="32767" attributes="0"/>
-                              <Component id="btnMenuPrincipalComandas" alignment="1" max="32767" attributes="0"/>
-                              <Component id="btnMenuPrincipalMesas" max="32767" attributes="0"/>
-                              <Component id="btnMenuPrincipalClientes" alignment="1" max="32767" attributes="0"/>
-                              <Component id="btnMenuPrincipalProductos" alignment="1" max="32767" attributes="0"/>
-                              <Component id="btnMenuPrincipalIngredientes" alignment="1" pref="151" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                  <EmptySpace min="-2" pref="265" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jButtonComandas" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jButtonMesas" max="32767" attributes="0"/>
+                      <Component id="jButtonClientes" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jButtonMenu" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jButtonInventario" alignment="1" pref="151" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="278" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <Component id="jButtonCerrarSesion" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jButtonReportes" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -74,21 +69,22 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="79" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="btnMenuPrincipalEmpleados" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                  <Component id="jButtonComandas" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnMenuPrincipalComandas" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonMesas" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnMenuPrincipalMesas" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonClientes" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnMenuPrincipalClientes" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonMenu" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnMenuPrincipalProductos" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnMenuPrincipalIngredientes" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="52" max="32767" attributes="0"/>
-                  <Component id="btnMenuPrincipalSalir" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <Component id="jButtonInventario" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jButtonCerrarSesion" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonReportes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -102,21 +98,7 @@
             <Property name="text" type="java.lang.String" value="Men&#xfa; Principal"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnMenuPrincipalEmpleados">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="b9" green="ad" red="a1" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI Variable" size="18" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Empleados"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuPrincipalEmpleadosActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnMenuPrincipalMesas">
+        <Component class="javax.swing.JButton" name="jButtonMesas">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b9" green="ad" red="a1" type="rgb"/>
@@ -126,8 +108,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Mesas"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMesasActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnMenuPrincipalClientes">
+        <Component class="javax.swing.JButton" name="jButtonClientes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b9" green="ad" red="a1" type="rgb"/>
@@ -137,8 +122,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Clientes"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonClientesActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnMenuPrincipalIngredientes">
+        <Component class="javax.swing.JButton" name="jButtonInventario">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b9" green="ad" red="a1" type="rgb"/>
@@ -148,8 +136,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Ingredientes"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonInventarioActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnMenuPrincipalComandas">
+        <Component class="javax.swing.JButton" name="jButtonComandas">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b9" green="ad" red="a1" type="rgb"/>
@@ -159,8 +150,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Comandas"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonComandasActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnMenuPrincipalSalir">
+        <Component class="javax.swing.JButton" name="jButtonCerrarSesion">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="7a" green="7a" red="ff" type="rgb"/>
@@ -170,8 +164,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCerrarSesionActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnMenuPrincipalProductos">
+        <Component class="javax.swing.JButton" name="jButtonMenu">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b9" green="ad" red="a1" type="rgb"/>
@@ -183,7 +180,21 @@
             <Property name="actionCommand" type="java.lang.String" value=""/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuPrincipalProductosActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMenuActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonReportes">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Variable" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Reporte"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonReportesActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

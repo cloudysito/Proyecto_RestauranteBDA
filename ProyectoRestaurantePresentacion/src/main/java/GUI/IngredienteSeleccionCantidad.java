@@ -24,7 +24,7 @@ import javax.swing.SwingConstants;
 
 /**
  *
- * @author leoca
+ * @author santi
  */
 public class IngredienteSeleccionCantidad extends JPanel {
     private final Ingrediente ingrediente;
