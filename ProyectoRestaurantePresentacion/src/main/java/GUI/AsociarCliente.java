@@ -8,12 +8,12 @@ package GUI;
  *
  * @author riosr
  */
-public class ReportesCliente extends javax.swing.JPanel {
+public class AsociarCliente extends javax.swing.JPanel {
 
     /**
-     * Creates new form ReportesCliente
+     * Creates new form AsociarCliente
      */
-    public ReportesCliente() {
+    public AsociarCliente() {
         initComponents();
     }
 
