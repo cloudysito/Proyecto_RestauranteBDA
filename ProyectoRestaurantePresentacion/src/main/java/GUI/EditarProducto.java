@@ -48,7 +48,7 @@ public class EditarProducto extends javax.swing.JPanel {
         this.ingredientesProductosBO = ingredientesProductosBO;
         this.producto = producto;
         initComponents();
-        setLocationRelativeTo(null);
+//        setLocationRelativeTo(null);
         cargarDatosProducto();
 
         try {
@@ -66,7 +66,7 @@ public class EditarProducto extends javax.swing.JPanel {
     
     public void cerrar(){
         setVisible(false);
-        dispose();
+//        dispose();
     }
 
     private void cargarDatosProducto() {
@@ -132,7 +132,7 @@ public class EditarProducto extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextFieldNombreProducto = new javax.swing.JTextField();
         jTextFieldNombrePrecio = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
         jComboBoxCategoria = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -159,8 +159,8 @@ public class EditarProducto extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Variable", 1, 40)); // NOI18N
-        jLabel1.setText("Editar Producto");
+        lblTitulo.setFont(new java.awt.Font("Segoe UI Variable", 1, 40)); // NOI18N
+        lblTitulo.setText("Editar Producto");
 
         jComboBoxCategoria.setFont(new java.awt.Font("Segoe UI Variable", 0, 18)); // NOI18N
         jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Platillo", "Postre", "Bebida" }));
@@ -209,7 +209,7 @@ public class EditarProducto extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblTitulo)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -236,7 +236,7 @@ public class EditarProducto extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel1)
+                .addComponent(lblTitulo)
                 .addGap(68, 68, 68)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -305,7 +305,6 @@ public class EditarProducto extends javax.swing.JPanel {
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JComboBox<String> jComboBoxCategoria;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -313,5 +312,6 @@ public class EditarProducto extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldNombrePrecio;
     private javax.swing.JTextField jTextFieldNombreProducto;
+    private javax.swing.JLabel lblTitulo;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,19 +4,124 @@
  */
 package GUI;
 
+import Dominio.Producto;
+import Dominio.UnidadMedida;
+import Dominio.TipoProducto;
+import GUI.ControlPresentacion.ControlPresentacion;
+import dto.IngredienteProductoDTO;
+import dto.NuevoIngredienteDTO;
+import dto.NuevoProductoDTO;
+import exception.NegocioException;
+import implementaciones.IngredientesProductosBO;
+import interfaces.IIngredientesBO;
+import interfaces.IIngredientesProductosBO;
+import interfaces.IProductosBO;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
+import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author riosr
  */
 public class NuevoProducto extends javax.swing.JPanel {
 
+    private ControlPresentacion control;
+    private IIngredientesBO ingredientesBO;
+    private IngredientesProductosBO ingredientesProductosBO;
+    private IProductosBO productosBO;
+    private static final Logger LOG = Logger.getLogger(NuevoProducto.class.getName());
+    private Long idProductoActual;
+    private List<IngredienteProductoDTO> ingredientesSeleccionados = new ArrayList<>();
+
     /**
      * Creates new form NuevoProducto
      */
+    
     public NuevoProducto() {
         initComponents();
     }
 
+    public NuevoProducto(ControlPresentacion control, IProductosBO productosBO, IIngredientesBO ingredientesBO, IIngredientesProductosBO ingredientesProductosBO) {
+    this.control = control;
+    this.productosBO = productosBO;
+    this.ingredientesBO = ingredientesBO;
+    this.ingredientesProductosBO = (IngredientesProductosBO) ingredientesProductosBO;
+    initComponents();
+//    setLocationRelativeTo(null);
+  }
+    
+    public void mostrar(){
+        setVisible(true);
+    }
+    
+    public void cerrar(){
+        setVisible(false);
+//        dispose();
+    }
+    
+    public void limpiar(){
+        jTextFieldNombreProducto.setText("Nombre");
+        jTextFieldNombrePrecio.setText("0.00");
+    }
+    
+    public void registrarProducto() {
+    String nombre = this.jTextFieldNombreProducto.getText();
+
+    try {
+        float precio = Float.parseFloat(this.jTextFieldNombrePrecio.getText());
+
+        TipoProducto tipo = TipoProducto.PLATILLO;
+        if (jComboBoxCategoria.getSelectedItem().equals("Platillo")) {
+            tipo = TipoProducto.PLATILLO;
+        } else if (jComboBoxCategoria.getSelectedItem().equals("Postre")) {
+            tipo = TipoProducto.POSTRE;
+        } else if (jComboBoxCategoria.getSelectedItem().equals("Bebida")) {
+            tipo = TipoProducto.BEBIDA;
+        }
+
+        NuevoProductoDTO nuevoProducto = new NuevoProductoDTO(nombre, precio, tipo);
+
+        try {
+            Producto productoRegistrado = this.productosBO.registrarProducto(nuevoProducto);
+            Long idProducto = productoRegistrado.getId();
+            this.idProductoActual = idProducto;
+
+            // Mostrar mensaje de éxito 🎉
+            JOptionPane.showMessageDialog(this, "Producto registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NegocioException ex) {
+            LOG.severe("No se pudo registrar el producto: " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Error al registrar el producto:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "El precio ingresado no es válido.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+    }
+}
+    
+    public void mostrarIngredientesSeleccionados(List<IngredienteProductoDTO> nuevos) {
+        this.ingredientesSeleccionados = nuevos; 
+
+        JPanel panelVisual = new JPanel();
+        panelVisual.setLayout(new BoxLayout(panelVisual, BoxLayout.Y_AXIS));
+        panelVisual.setOpaque(false);
+
+        for (IngredienteProductoDTO ingredienteProductoDTO : nuevos) {
+            String nombre = ingredienteProductoDTO.getIngrediente().getNombre();
+            float cantidad = ingredienteProductoDTO.getCantidad();
+            String unidad = ingredienteProductoDTO.getIngrediente().getUnidadMedida().toString();
+
+            panelVisual.add(new IngredienteVisualPanel(nombre, cantidad, unidad));
+        }
+
+        jScrollPaneIngredientesSeleccionados.setViewportView(panelVisual);
+        panelVisual.revalidate();
+        panelVisual.repaint();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,19 +131,198 @@ public class NuevoProducto extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jButtonConfirmar = new javax.swing.JButton();
+        jButtonAnterior = new javax.swing.JButton();
+        jTextFieldNombreProducto = new javax.swing.JTextField();
+        jComboBoxCategoria = new javax.swing.JComboBox<>();
+        jTextFieldNombrePrecio = new javax.swing.JTextField();
+        jScrollPaneIngredientesSeleccionados = new javax.swing.JScrollPane();
+
+        jPanel2.setBackground(new java.awt.Color(124, 184, 245));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Variable", 1, 40)); // NOI18N
+        jLabel1.setText("Añadir Producto");
+
+        jButtonConfirmar.setBackground(new java.awt.Color(124, 245, 143));
+        jButtonConfirmar.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
+        jButtonConfirmar.setText("Guardar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
+
+        jButtonAnterior.setBackground(new java.awt.Color(245, 124, 124));
+        jButtonAnterior.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
+        jButtonAnterior.setText("Regresar");
+        jButtonAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnteriorActionPerformed(evt);
+            }
+        });
+
+        jTextFieldNombreProducto.setBackground(new java.awt.Color(29, 39, 56));
+        jTextFieldNombreProducto.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jTextFieldNombreProducto.setForeground(new java.awt.Color(255, 255, 255));
+        jTextFieldNombreProducto.setText(" Nombre");
+        jTextFieldNombreProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jTextFieldNombreProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextFieldNombreProductoMousePressed(evt);
+            }
+        });
+        jTextFieldNombreProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNombreProductoActionPerformed(evt);
+            }
+        });
+
+        jComboBoxCategoria.setEditable(true);
+        jComboBoxCategoria.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jComboBoxCategoria.setForeground(new java.awt.Color(255, 255, 255));
+        jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Platillo", "Postre", "Bebida" }));
+        jComboBoxCategoria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jComboBoxCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxCategoriaActionPerformed(evt);
+            }
+        });
+
+        jTextFieldNombrePrecio.setBackground(new java.awt.Color(29, 39, 56));
+        jTextFieldNombrePrecio.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jTextFieldNombrePrecio.setForeground(new java.awt.Color(255, 255, 255));
+        jTextFieldNombrePrecio.setText(" Precio");
+        jTextFieldNombrePrecio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jTextFieldNombrePrecio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextFieldNombrePrecioMousePressed(evt);
+            }
+        });
+        jTextFieldNombrePrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNombrePrecioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jButtonAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 549, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldNombrePrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPaneIngredientesSeleccionados, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonConfirmar)
+                        .addGap(43, 43, 43))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel1)
+                        .addGap(56, 56, 56)
+                        .addComponent(jTextFieldNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jTextFieldNombrePrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonConfirmar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPaneIngredientesSeleccionados, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)))
+                .addComponent(jButtonAnterior)
+                .addGap(19, 19, 19))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        // TODO add your handling code here:
+        registrarProducto();
+        AgregarIngrediente agregar = new AgregarIngrediente(
+        null, 
+        ingredientesBO,
+        ingredientesProductosBO,
+        this,
+        ingredientesSeleccionados 
+    
+        );
+        control.mostrarAgregarIngrediente(idProductoActual, this, ingredientesSeleccionados);
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    private void jButtonAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnteriorActionPerformed
+        // TODO add your handling code here:
+        cerrar();
+        control.mostrarListaProductos();
+    }//GEN-LAST:event_jButtonAnteriorActionPerformed
+
+    private void jTextFieldNombreProductoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNombreProductoMousePressed
+        if (jTextFieldNombreProducto.getText().equals(" Nombre")) {
+            jTextFieldNombreProducto.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldNombreProductoMousePressed
+
+    private void jTextFieldNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNombreProductoActionPerformed
+
+    private void jComboBoxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxCategoriaActionPerformed
+
+    private void jTextFieldNombrePrecioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNombrePrecioMousePressed
+        if (jTextFieldNombrePrecio.getText().equals(" Precio")) {
+            jTextFieldNombrePrecio.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldNombrePrecioMousePressed
+
+    private void jTextFieldNombrePrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombrePrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNombrePrecioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAnterior;
+    private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JComboBox<String> jComboBoxCategoria;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPaneIngredientesSeleccionados;
+    private javax.swing.JTextField jTextFieldNombrePrecio;
+    private javax.swing.JTextField jTextFieldNombreProducto;
     // End of variables declaration//GEN-END:variables
 }

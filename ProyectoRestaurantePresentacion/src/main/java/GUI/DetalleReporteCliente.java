@@ -6,6 +6,7 @@ package GUI;
 
 import GUI.ControlPresentacion.ControlPresentacion;
 import dto.ClienteFrecuenteDTO;
+import interfaces.IClientesBO;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,6 +15,16 @@ import java.util.Date;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 /**
  *
@@ -21,8 +32,9 @@ import javax.swing.JOptionPane;
  */
 public class DetalleReporteCliente extends javax.swing.JPanel {
 
+    private IClientesBO clientesBO;
+    private ClienteFrecuenteDTO clienteDTO;
     private ControlPresentacion control;
-    private IClientesBO productosBO;
     private static final Logger LOG = Logger.getLogger(DetalleReporteCliente.class.getName());
     FontManager fontManager = new FontManager();
     
@@ -34,7 +46,7 @@ public class DetalleReporteCliente extends javax.swing.JPanel {
         initComponents();
         this.clientesBO = clientesBO;
         this.clienteDTO = clienteDTO;
-        setLocationRelativeTo(null);
+//        setLocationRelativeTo(null);
         
         cargarDatosCliente(clienteDTO);
         configurarCamposNoEditables();
@@ -212,7 +224,7 @@ public class DetalleReporteCliente extends javax.swing.JPanel {
     
     public void cerrar(){
         setVisible(false);
-        dispose();
+//        dispose();
     }
     
     /**
@@ -238,6 +250,7 @@ public class DetalleReporteCliente extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jTextFieldPuntos = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        jLabelVisitas = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(145, 192, 255));
 
@@ -255,10 +268,8 @@ public class DetalleReporteCliente extends javax.swing.JPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nombre completo:");
 
-        jTextFieldNombreCliente.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldNombreCliente.setText("jTextField1");
         jTextFieldNombreCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,41 +277,33 @@ public class DetalleReporteCliente extends javax.swing.JPanel {
             }
         });
 
-        jTextFieldApellidoPaterno.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldApellidoPaterno.setText("jTextField2");
 
-        jTextFieldApellidoMaterno.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldApellidoMaterno.setText("jTextField3");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Telefono:");
 
-        jTextFieldTelefono.setBackground(new java.awt.Color(255, 255, 255));
-        jTextFieldTelefono.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldTelefono.setText("jTextField4");
 
         jLabel4.setBackground(new java.awt.Color(0, 0, 0));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Correo electronico:");
 
-        jTextFieldCorreoElectronico.setBackground(new java.awt.Color(255, 255, 255));
-        jTextFieldCorreoElectronico.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldCorreoElectronico.setText("jTextField5");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Puntos:");
 
-        jTextFieldPuntos.setBackground(new java.awt.Color(255, 255, 255));
-        jTextFieldPuntos.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldPuntos.setText("jTextField6");
 
         jLabel6.setBackground(new java.awt.Color(0, 0, 0));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Visitas:");
+
+        jLabelVisitas.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelVisitas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabelVisitas.setText("Visitas:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -330,7 +333,8 @@ public class DetalleReporteCliente extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jTextFieldPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabelVisitas))))
                 .addContainerGap(188, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -353,15 +357,17 @@ public class DetalleReporteCliente extends javax.swing.JPanel {
                     .addComponent(jTextFieldApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(41, 41, 41)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelVisitas))
                 .addGap(31, 31, 31)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextFieldCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -397,6 +403,7 @@ public class DetalleReporteCliente extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelVisitas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextFieldApellidoMaterno;
     private javax.swing.JTextField jTextFieldApellidoPaterno;

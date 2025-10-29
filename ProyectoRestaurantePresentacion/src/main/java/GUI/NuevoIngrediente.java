@@ -33,7 +33,7 @@ public class NuevoIngrediente extends javax.swing.JPanel {
         this.control = control;
         this.ingredientesBO = ingredientesBO;
         initComponents();    
-        setLocationRelativeTo(null);
+//        setLocationRelativeTo(null);
     }
     
     public void mostrar(){
@@ -42,10 +42,10 @@ public class NuevoIngrediente extends javax.swing.JPanel {
     
     public void cerrar(){
         setVisible(false);
-        dispose();
+//        dispose();
     }
     
-    public void registrar() throws NegocioException{
+    public void registrar() {
        try {
         String nombre = this.jTextFieldNombre.getText();
         float stock = Float.parseFloat(this.jTextFieldCantidad.getText());
@@ -239,14 +239,6 @@ public class NuevoIngrediente extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNombreActionPerformed
-
-    private void jTextFieldCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCantidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCantidadActionPerformed
-
     
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
@@ -259,29 +251,37 @@ public class NuevoIngrediente extends javax.swing.JPanel {
         control.mostrarListaProductos();
     }//GEN-LAST:event_jButtonAnteriorActionPerformed
 
-    private void jComboBoxUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxUnidadActionPerformed
+    private void jTextFieldCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCantidadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxUnidadActionPerformed
-
-    private void jTextFieldNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNombreMousePressed
-        // TODO add your handling code here:
-        if(jTextFieldNombre.getText().equals("Nombre")){
-            jTextFieldNombre.setText("");
-        } 
-        if(jTextFieldCantidad.getText().isEmpty()){
-             jTextFieldCantidad.setText("0");
-        }  
-    }//GEN-LAST:event_jTextFieldNombreMousePressed
+    }//GEN-LAST:event_jTextFieldCantidadActionPerformed
 
     private void jTextFieldCantidadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldCantidadMousePressed
         // TODO add your handling code here:
         if(jTextFieldCantidad.getText().equals("0")){
             jTextFieldCantidad.setText("");
-        } 
+        }
         if(jTextFieldNombre.getText().isEmpty()){
-             jTextFieldNombre.setText("Nombre");
-        } 
+            jTextFieldNombre.setText("Nombre");
+        }
     }//GEN-LAST:event_jTextFieldCantidadMousePressed
+
+    private void jComboBoxUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxUnidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxUnidadActionPerformed
+
+    private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNombreActionPerformed
+
+    private void jTextFieldNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNombreMousePressed
+        // TODO add your handling code here:
+        if(jTextFieldNombre.getText().equals("Nombre")){
+            jTextFieldNombre.setText("");
+        }
+        if(jTextFieldCantidad.getText().isEmpty()){
+            jTextFieldCantidad.setText("0");
+        }
+    }//GEN-LAST:event_jTextFieldNombreMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

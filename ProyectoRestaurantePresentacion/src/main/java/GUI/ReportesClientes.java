@@ -31,7 +31,7 @@ public class ReportesClientes extends javax.swing.JPanel {
      */
     public ReportesClientes(ControlPresentacion control, IClientesBO clientesBO) {
         initComponents();
-        setLocationRelativeTo(null);
+//        setLocationRelativeTo(null);
         this.clientesBO = clientesBO;
         this.control = control;
        
@@ -128,7 +128,7 @@ public class ReportesClientes extends javax.swing.JPanel {
     
     public void cerrar(){
         setVisible(false);
-        dispose();
+//        dispose();
     }
 
     /**
