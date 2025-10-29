@@ -4,17 +4,57 @@
  */
 package GUI;
 
+import GUI.ControlPresentacion.ControlPresentacion;
+import dto.ComandaDTO;
+import dto.DetalleComandaDTO;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.text.Document;
+
 /**
  *
  * @author riosr
  */
 public class ReportesComandas extends javax.swing.JPanel {
 
+    FontManager fontManager = new FontManager();
+    private IComandasBO comandasBO;
+    private IDetallesComandasBO detallesComandasBO;
+    private ControlPresentacion control;
+
     /**
      * Creates new form ReportesComandas
      */
-    public ReportesComandas() {
+    public ReportesComandas(ControlPresentacion control, IComandasBO comandasBO, IDetallesComandasBO detallesComandasBO) {
+        setLocationRelativeTo(null);
+        
+        this.comandasBO = comandasBO;
+        this.detallesComandasBO=detallesComandasBO;
+        this.control = control;
+        
+        mostrarTodasLasComandas();
+        jPanelComandas.setOpaque(false);
+        jScrollPaneComandas.setOpaque(false);
+        jScrollPaneComandas.getViewport().setOpaque(false);
+        jScrollPaneComandas.setBorder(null);) {
         initComponents();
+    }
+}        
+    
+    public void mostrar(){
+        setVisible(true);
+    }
+    
+    public void cerrar(){
+        setVisible(false);
+        dispose();
     }
 
     /**
@@ -26,19 +66,238 @@ public class ReportesComandas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        pickerFechaInicio = new com.github.lgooddatepicker.components.DatePicker();
+        jLabel3 = new javax.swing.JLabel();
+        pickerFechaFin = new com.github.lgooddatepicker.components.DatePicker();
+        jButtonGenerarReporte = new javax.swing.JButton();
+        jScrollPaneComandas = new javax.swing.JScrollPane();
+        jPanelComandas = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+
+        jPanel1.setBackground(new java.awt.Color(124, 184, 245));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Reportes Comandas");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Fecha Inicio");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Fecha Fin ");
+
+        jButtonGenerarReporte.setFont(fontManager.getNunitoBold(16f)
+        );
+        jButtonGenerarReporte.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonGenerarReporte.setText("Descargar Reporte");
+        jButtonGenerarReporte.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jButtonGenerarReporte.setContentAreaFilled(false);
+        jButtonGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGenerarReporteActionPerformed(evt);
+            }
+        });
+
+        jScrollPaneComandas.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        jPanelComandas.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelComandas.setLayout(new javax.swing.BoxLayout(jPanelComandas, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPaneComandas.setViewportView(jPanelComandas);
+
+        jLabel4.setText("Folio");
+
+        jLabel5.setText("Nombre Cliente");
+
+        jLabel6.setText("Estado");
+
+        jLabel7.setText("Total");
+
+        jLabel8.setText("Mesa");
+
+        jLabel9.setText("Fecha y hora");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(107, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(341, 341, 341))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPaneComandas, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(92, 92, 92))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(184, 184, 184)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pickerFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(pickerFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addComponent(jLabel4)
+                .addGap(86, 86, 86)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(83, 83, 83)
+                .addComponent(jLabel7)
+                .addGap(82, 82, 82)
+                .addComponent(jLabel8)
+                .addGap(120, 120, 120)
+                .addComponent(jLabel9)
+                .addGap(161, 161, 161))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLabel1)
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pickerFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(pickerFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPaneComandas, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(jButtonGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarReporteActionPerformed
+        Document documento = new Document();
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Guardar reporte como...");
+        fileChooser.setSelectedFile(new File("Reporte.pdf"));
+
+        if (fileChooser.showSaveDialog(this) != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+
+        File outputFile = fileChooser.getSelectedFile();
+
+        try{
+            LocalDate fechaInicio = pickerFechaInicio.getDate();
+            LocalDate fechaFin = pickerFechaFin.getDate();
+
+            PdfWriter.getInstance(documento, new FileOutputStream(fileChooser.getSelectedFile()));
+
+            documento.open();
+            PdfPTable tabla = new PdfPTable(6);
+            tabla.addCell("Folio");
+            tabla.addCell("Fecha Registro");
+            tabla.addCell("Estado");
+            tabla.addCell("Total Venta");
+            tabla.addCell("Mesa");
+            tabla.addCell("Cliente");
+
+            List<ComandaDTO> comandasDTO;
+            if(fechaInicio == null || fechaFin == null){
+                comandasDTO = this.comandasBO.obtenerComandas();
+            } else {
+                Calendar calendarFechaInicio = convertLocalDateToCalendar(fechaInicio);
+                Calendar calendarFechaFin = convertLocalDateToCalendar(fechaFin);
+
+                comandasDTO = this.comandasBO.obtenerComandasPorFechas(calendarFechaInicio, calendarFechaFin);
+            }
+
+            for (ComandaDTO comanda : comandasDTO) {
+                Calendar calendar = comanda.getFechaHoraCreacion();
+                String fechaHoraStr = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
+                .format(calendar.toInstant().atZone(ZoneId.systemDefault()));
+
+                float total = 0f;
+                List <DetalleComandaDTO> detalles = detallesComandasBO.obtenerDetallesDTOPorComanda(comanda);
+                for (DetalleComandaDTO detalle : detalles) {
+                    total += detalle.getPrecio() * detalle.getCantidadProducto();
+                }
+
+                tabla.addCell(comanda.getFolio() != null ? comanda.getFolio() : "");
+                tabla.addCell(fechaHoraStr);
+
+                tabla.addCell(comanda.getEstadoComanda() != null ? comanda.getEstadoComanda().toString() : "SIN ESTADO");
+                tabla.addCell(String.format("$%.2f", total)); // Total (uwu)
+                tabla.addCell(comanda.getMesa() != null ? String.valueOf(comanda.getMesa().getNumeroMesa()) : "");
+
+                tabla.addCell(comanda.getCliente() != null && comanda.getCliente().getNombreCompleto() != null
+                    ? comanda.getCliente().getNombreCompleto()
+                    : "Sin cliente");
+            }
+
+            documento.add(tabla);
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Reporte generado con éxito en:\n" + outputFile.getAbsolutePath(),
+                "Éxito",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Error al generar PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }finally {
+            if (documento != null && documento.isOpen()) {
+                documento.close();
+            }
+        }
+    }//GEN-LAST:event_jButtonGenerarReporteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonGenerarReporte;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelComandas;
+    private javax.swing.JScrollPane jScrollPaneComandas;
+    private com.github.lgooddatepicker.components.DatePicker pickerFechaFin;
+    private com.github.lgooddatepicker.components.DatePicker pickerFechaInicio;
     // End of variables declaration//GEN-END:variables
 }
