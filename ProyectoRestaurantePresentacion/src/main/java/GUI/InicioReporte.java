@@ -5,6 +5,7 @@
 package GUI;
 
 import GUI.ControlPresentacion.ControlPresentacion;
+import implementaciones.ComandasBO;
 
 /**
  *
@@ -25,7 +26,7 @@ public class InicioReporte extends javax.swing.JPanel {
     public InicioReporte(ControlPresentacion control) {
         this.control = control;
         initComponents();
-        setLocationRelativeTo(null);
+//        setLocationRelativeTo(null);
     }
     
     public void mostrar(){
@@ -34,7 +35,7 @@ public class InicioReporte extends javax.swing.JPanel {
     
     public void cerrar(){
         setVisible(false);
-        dispose();
+//        dispose();
     }
     
     /**
