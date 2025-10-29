@@ -18,6 +18,7 @@ import Dominio.Mesa;
 import Dominio.Producto;
 import Dominio.UnidadMedida;
 import GUI.AgregarIngrediente;
+import GUI.AsociarCliente;
 import GUI.AñadirStockIngrediente;
 import GUI.ConfirmacionInicioComandanda;
 import GUI.DetalleReporteCliente;
