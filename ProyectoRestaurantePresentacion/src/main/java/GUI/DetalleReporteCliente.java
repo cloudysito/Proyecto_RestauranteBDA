@@ -87,7 +87,7 @@ public class DetalleReporteCliente extends javax.swing.JPanel {
         jTextFieldPuntos.setText(String.valueOf(cliente.getPuntosFidelidad()) + " pts");
         
         jLabelVisitas.setText(String.valueOf(cliente.getVisitas()));
-        jLabelTotalAcumulado.setText(String.format("$%.2f", cliente.getGastoTotal()));
+//        jLabelTotalAcumulado.setText(String.format("$%.2f", cliente.getGastoTotal()));
     }
     
     private void generarReportePDF(ClienteFrecuenteDTO clienteDTO) {
