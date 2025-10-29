@@ -4,19 +4,39 @@
  */
 package GUI;
 
+import GUI.ControlPresentacion.ControlPresentacion;
+
 /**
  *
  * @author riosr
  */
 public class InicioReporte extends javax.swing.JPanel {
 
+    private ControlPresentacion control;
+    ComandasBO comandasBO;
+    
     /**
      * Creates new form InicioReporte
      */
     public InicioReporte() {
         initComponents();
     }
-
+    
+    public InicioReporte(ControlPresentacion control) {
+        this.control = control;
+        initComponents();
+        setLocationRelativeTo(null);
+    }
+    
+    public void mostrar(){
+        setVisible(true);
+    }
+    
+    public void cerrar(){
+        setVisible(false);
+        dispose();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,19 +46,119 @@ public class InicioReporte extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        btnClientesRegresar = new javax.swing.JButton();
+        jButtonReporteComandas = new javax.swing.JButton();
+        jButtonReporteClientes = new javax.swing.JButton();
+
+        jPanel1.setBackground(new java.awt.Color(145, 192, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Reportes");
+
+        btnClientesRegresar.setBackground(new java.awt.Color(255, 122, 122));
+        btnClientesRegresar.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        btnClientesRegresar.setText("Regresar");
+        btnClientesRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesRegresarActionPerformed(evt);
+            }
+        });
+
+        jButtonReporteComandas.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonReporteComandas.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        jButtonReporteComandas.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonReporteComandas.setText("Comandas");
+        jButtonReporteComandas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReporteComandasActionPerformed(evt);
+            }
+        });
+
+        jButtonReporteClientes.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonReporteClientes.setFont(new java.awt.Font("Segoe UI Variable", 1, 18)); // NOI18N
+        jButtonReporteClientes.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonReporteClientes.setText("Clientes");
+        jButtonReporteClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReporteClientesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(298, 298, 298)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonReporteComandas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonReporteClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jLabel1))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(btnClientesRegresar)))
+                .addContainerGap(292, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addComponent(btnClientesRegresar)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(53, 53, 53)
+                .addComponent(jButtonReporteComandas)
+                .addGap(52, 52, 52)
+                .addComponent(jButtonReporteClientes)
+                .addContainerGap(118, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnClientesRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesRegresarActionPerformed
+        // TODO add your handling code here:
+        cerrar();
+        control.mostrarVentanaPrincipal();
+    }//GEN-LAST:event_btnClientesRegresarActionPerformed
+
+    private void jButtonReporteComandasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReporteComandasActionPerformed
+        // TODO add your handling code here:
+        cerrar();
+        control.mostrarReporteComanda();
+    }//GEN-LAST:event_jButtonReporteComandasActionPerformed
+
+    private void jButtonReporteClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReporteClientesActionPerformed
+        cerrar();
+        control.mostrarReporteCliente();
+    }//GEN-LAST:event_jButtonReporteClientesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClientesRegresar;
+    private javax.swing.JButton jButtonReporteClientes;
+    private javax.swing.JButton jButtonReporteComandas;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
